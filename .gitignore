@@ -38,3 +38,5 @@ nosetests.xml
 .python-version
 build-test.sh
 .idea
+
+venv

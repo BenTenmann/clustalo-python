@@ -1,0 +1,3 @@
+[submodule "clustal-omega"]
+	path = clustal-omega
+	url = https://github.com/GSLBiotech/clustal-omega.git
