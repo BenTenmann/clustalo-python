@@ -50,7 +50,7 @@ def build_clustal():
 
     wd = (DIR / 'clustal-omega')
     subprocess.run('./configure --with-pic --with-openmp && make && sudo make install',
-                   cwd=wd, check=True)
+                   cwd=wd, check=True, shell=True)
 
 
 class BuildFlags:
