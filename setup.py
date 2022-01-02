@@ -23,20 +23,20 @@ LIBRARIES = ['clustalo', 'stdc++']
 
 
 def check_arg_table(system: str) -> bool:
-    cmd = {
-        'Darwin': ['brew', 'list'],
-        'Linux': ['apt', 'list']
+    cmd, tgt = {
+        'Darwin': (['brew', 'list'], 'argtable'),
+        'Linux': (['apt', 'list'], 'libargtable2-dev')
     }.get(system, [])
 
     response = subprocess.check_output(cmd)
-    out = 'argtable' in response.decode()
+    out = tgt in response.decode()
     return out
 
 
 def download_arg_table(system):
     commands = {
         'Darwin': [['brew', 'install', 'argtable']],
-        'Linux': [['sudo', 'apt', 'update'], ['sudo', 'apt', 'install', 'libargtable2', '-y']]
+        'Linux': [['sudo', 'apt', 'update'], ['sudo', 'apt', 'install', 'libargtable2-dev', '-y']]
     }.get(system, [[]])
 
     for cmd in commands:
