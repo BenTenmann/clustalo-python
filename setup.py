@@ -22,17 +22,6 @@ OPENMP_DISABLED = os.environ.get('OPENMP_DISABLED', False)
 LIBRARIES = ['clustalo', 'stdc++']
 
 
-def check_arg_table(system: str) -> bool:
-    cmd, tgt = {
-        'Darwin': (['brew', 'list'], 'argtable'),
-        'Linux': (['apt', 'list'], 'libargtable2-dev')
-    }.get(system, [])
-
-    response = subprocess.check_output(cmd)
-    out = tgt in response.decode()
-    return out
-
-
 def download_arg_table(system):
     commands = {
         'Darwin': [['brew', 'install', 'argtable']],
@@ -45,8 +34,7 @@ def download_arg_table(system):
 
 def build_clustal():
     system = platform.system()
-    if not check_arg_table(system):
-        download_arg_table(system)
+    download_arg_table(system)
 
     wd = (DIR / 'clustal-omega')
     subprocess.run('./configure --with-pic --with-openmp && make && sudo make install',
